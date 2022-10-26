@@ -18,9 +18,9 @@ $ npm start
   - 비밀번호 조건 : 숫자 & 문자 8자 이상
   - 이메일, 비밀번호 조건 충족 시 로그인 or 회원가입 버튼 활성화
   - 로그인 or 회원가입 시 토큰 로컬 스토리지 저장 후 /todo 경로 이동
-   - AuthContext saveToken 함수 호출 후 로컬스토리지 저장
+    - AuthContext saveToken 함수 호출 후 로컬스토리지 저장
   - 토큰이 없으면 / 페이지로 있다면 /todo 페이지로 리다이렉트
-   - AuthContext auth 값을 통해 토큰 값이 있는지 확인
+    - AuthContext auth 값을 통해 토큰 값이 있는지 확인
 ---
 ** 투두 리스트 페이지 **
 - [x] /todo 경로에 접속하면 투두 리스트 표시
