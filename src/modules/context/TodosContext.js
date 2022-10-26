@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState } from 'react';
 
 const context = {
   todos: [],
-  complete: false,
   getTodos: () => {},
 };
 
@@ -11,15 +10,14 @@ const TodosContext = createContext(context);
 
 const TodosContextProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
-  const [complete, setComplete] = useState(false);
 
   const getTodos = async () => {
-    const data = await reqGetTodos();
+    const { data, status } = await reqGetTodos();
 
-    if (data) setTodos([...data]);
+    if (status === 200) setTodos([...data]);
   };
 
-  const value = { todos, complete, setComplete, getTodos };
+  const value = { todos, getTodos };
 
   return (
     <TodosContext.Provider value={value}>{children}</TodosContext.Provider>

@@ -10,7 +10,7 @@ import { AiOutlineFileDone } from 'react-icons/ai';
 
 const Todo = ({ props }) => {
   const { id, todo, isCompleted } = props;
-  const { getTodos, setComplete } = useTodos();
+  const { getTodos } = useTodos();
 
   const [update, setUpdate] = useState(false);
   const [hover, setHover] = useState(false);
@@ -24,7 +24,7 @@ const Todo = ({ props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
-  const onChange = (e) => {
+  const onInputChange = (e) => {
     let { value } = e.target;
 
     if (value.length > 200) {
@@ -32,11 +32,10 @@ const Todo = ({ props }) => {
     }
   };
 
-  const onCheck = async (complete) => {
+  const onCompleteClick = async (complete) => {
     const { status } = await reqUpdateTodo(id, todo, complete);
 
     if (status === 200) {
-      setComplete(true);
       getTodos();
     }
   };
@@ -49,8 +48,8 @@ const Todo = ({ props }) => {
     );
 
     if (status === 200) {
+      alert('완료했습니다.');
       setUpdate(false);
-      setComplete(true);
       getTodos();
     }
   };
@@ -59,7 +58,7 @@ const Todo = ({ props }) => {
     const { status } = await reqDeleteTodo(id);
 
     if (status === 204) {
-      setComplete(true);
+      alert('완료했습니다.');
       getTodos();
     }
   };
@@ -74,7 +73,7 @@ const Todo = ({ props }) => {
         {isCompleted ? <AiOutlineFileDone /> : <RiTodoFill />}
       </IconStyles>
       {update ? (
-        <InputStyles type="text" ref={contentRef} onChange={onChange} />
+        <InputStyles type="text" ref={contentRef} onChange={onInputChange} />
       ) : (
         <TextStyles isCompleted={isCompleted}>{todo}</TextStyles>
       )}
@@ -85,7 +84,7 @@ const Todo = ({ props }) => {
               <ButtonStyles
                 className="check"
                 title="되돌리기"
-                onClick={() => onCheck(false)}
+                onClick={() => onCompleteClick(false)}
               >
                 <MdRefresh />
               </ButtonStyles>
@@ -93,7 +92,7 @@ const Todo = ({ props }) => {
               <ButtonStyles
                 className="check"
                 title="완료"
-                onClick={() => onCheck(true)}
+                onClick={() => onCompleteClick(true)}
               >
                 <BsCheck />
               </ButtonStyles>

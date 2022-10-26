@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Dialog = ({ children, open, onClose }) => {
+const Dialog = ({ children, open }) => {
   return (
     <>
       {open ? (

@@ -2,19 +2,19 @@ import axios from 'axios';
 
 export const client = axios.create();
 
-// client.defaults.baseURL = 'http://localhost:8000';
-client.defaults.baseURL = 'https://pre-onboarding-selection-task.shop/';
+client.defaults.baseURL = 'http://localhost:8000';
+// client.defaults.baseURL = 'https://pre-onboarding-selection-task.shop/';
 client.defaults.headers.common[
   'Authorization'
 ] = `Bearer ${localStorage.getItem('access_token')}`;
 
 export const get = async (url) => {
   try {
-    const { data } = await client.get(url);
+    const { data, status } = await client.get(url);
 
-    return data;
+    return { data, status };
   } catch (e) {
-    return e.response.data;
+    return e.response;
   }
 };
 
@@ -24,7 +24,7 @@ export const post = async (url, { ...rest }) => {
 
     return { data, status };
   } catch (e) {
-    return e.response.data;
+    return e.response;
   }
 };
 
@@ -34,7 +34,7 @@ export const put = async (url, id, { ...rest }) => {
 
     return { data, status };
   } catch (e) {
-    return e.response.data;
+    return e.response;
   }
 };
 
@@ -46,6 +46,6 @@ export const remove = async (url, { ...rest }) => {
 
     return { data, status };
   } catch (e) {
-    return e.response.data;
+    return e.response;
   }
 };

@@ -45,21 +45,20 @@ const AuthForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const data = await request(
+    const { data, status } = await request(
       emailRef.current.value,
       passwordRef.current.value
     );
 
     // 요청 실패
-    // data에 statusCode가 있으면 에러
-    if (data.statusCode) {
+    if (status !== 200) {
       alert(data.message);
       return;
     }
 
     // 요청 성공
     // 로컬 스토리지에 token 저장
-    saveToken(data.data.access_token);
+    saveToken(data.access_token);
     navigate('/todo');
   };
 

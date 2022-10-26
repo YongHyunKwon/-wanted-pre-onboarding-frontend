@@ -1,10 +1,11 @@
-const { reqCreateTodo } = require('api/todo/todo');
-const { useTodos } = require('modules/context/TodosContext');
-const { useRef } = require('react');
-const { default: styled } = require('styled-components');
+import { reqCreateTodo } from 'api/todo/todo';
+import { useTodos } from 'modules/context/TodosContext';
+import React, { useRef } from 'react';
+import styled from 'styled-components';
 
-const TodoModal = ({ onClose }) => {
+const TodoAddModal = ({ onClose }) => {
   const { getTodos } = useTodos();
+
   const contentRef = useRef(null);
 
   const onChange = (e) => {
@@ -16,11 +17,15 @@ const TodoModal = ({ onClose }) => {
   };
 
   const onCreate = async () => {
-    const { status } = await reqCreateTodo(contentRef.current.value);
+    const { value } = contentRef.current;
 
-    if (status === 201) {
-      onClose(false);
-      getTodos();
+    if (value) {
+      const { status } = await reqCreateTodo(contentRef.current.value);
+
+      if (status === 201) {
+        onClose(false);
+        getTodos();
+      }
     }
   };
 
@@ -41,6 +46,8 @@ const TodoModal = ({ onClose }) => {
     </Wrap>
   );
 };
+
+export default TodoAddModal;
 
 const Wrap = styled.div`
   position: relative;
@@ -77,5 +84,3 @@ const ButtonWrap = styled.div`
     background-color: #f13838;
   }
 `;
-
-export default TodoModal;

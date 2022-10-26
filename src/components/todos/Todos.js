@@ -1,14 +1,13 @@
-import Snackbar from 'components/common/Snackbar';
 import Todo from 'components/todo/Todo';
 import { useTodos } from 'modules/context/TodosContext';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
 import Dialog from 'components/common/Dialog';
-import TodoModal from 'components/todo/TodoModal';
+import TodoAddModal from 'components/todo/TodoAddModal';
 
 const Todos = () => {
-  const { todos, complete, setComplete, getTodos } = useTodos();
+  const { todos, getTodos } = useTodos();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -29,10 +28,8 @@ const Todos = () => {
         ))}
       </ul>
       <Dialog open={open} onClose={setOpen}>
-        <TodoModal onClose={setOpen} />
+        <TodoAddModal onClose={setOpen} />
       </Dialog>
-
-      <Snackbar open={complete} msg="완료했습니다." onClose={setComplete} />
     </Wrap>
   );
 };
