@@ -26,3 +26,29 @@ $ npm start
   - [x] 화면 5시 방향 추가 버튼 누르면 modal 창 생성 후 투두 입력 가능
   - [x] 투두 el에 hover 시 수정, 완료, 삭제 버튼 표시
   - [x] 수정 버튼 누르면 수정 완료, 수정 취소 버튼 표시
+
+## 프로젝트 구조
+```
+📁 src
+├── api
+│   ├── auth
+│   ├── todo
+│   └── todos
+
+├── components
+│   ├── auth
+│   ├── common
+│   ├── todo
+│   └── todos
+
+├── modules
+│   ├── context
+│   └── hook
+
+├── pages
+├── routes
+├── styles
+
+├── App.js
+└── index.js
+```
