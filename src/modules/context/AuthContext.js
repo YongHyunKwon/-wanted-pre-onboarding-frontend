@@ -1,4 +1,3 @@
-import { client } from 'api/client';
 import React, { createContext, useContext, useState } from 'react';
 
 const context = {
@@ -14,8 +13,6 @@ const AuthContextProvider = ({ children }) => {
   const saveToken = (token) => {
     localStorage.setItem('access_token', token);
     setAuth(token);
-
-    client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
   const value = { auth, saveToken };

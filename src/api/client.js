@@ -1,12 +1,22 @@
 import axios from 'axios';
 
-export const client = axios.create();
+export const client = axios.create({
+  baseURL: 'http://localhost:8000',
+  // baseURL: 'https://pre-onboarding-selection-task.shop/',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
-client.defaults.baseURL = 'http://localhost:8000';
-// client.defaults.baseURL = 'https://pre-onboarding-selection-task.shop/';
-client.defaults.headers.common[
-  'Authorization'
-] = `Bearer ${localStorage.getItem('access_token')}`;
+client.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token');
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
 
 export const get = async (url) => {
   try {
