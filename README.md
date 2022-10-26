@@ -20,7 +20,7 @@ $ npm start
   - 로그인 or 회원가입 시 토큰 로컬 스토리지 저장 후 /todo 경로 이동
     - AuthContext saveToken 함수 호출 후 로컬스토리지 저장
   - 토큰이 없으면 / 페이지로 있다면 /todo 페이지로 리다이렉트
-    - AuthContext auth 값을 통해 토큰 값이 있는지 확인
+    - 라우터에서 AuthContext auth 값을 통해 토큰 값이 있는지 확인
 ---
 ** 투두 리스트 페이지 **
 - /todo 경로에 접속하면 투두 리스트 표시
